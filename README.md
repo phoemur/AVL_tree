@@ -1,6 +1,5 @@
 # AVL_tree
-Naive C++ implementation of an AVL tree using modern C++ (C++14, smart_pointers,etc...), and also a naive implementation of map using it.
-
+Naive implementation of an AVL tree using modern C++ (C++14, smart_pointers,etc...), and also an implementation of map using it.
 
 avltree_raw_pointers.hpp : header only implementation of AVL tree using raw pointers
 
