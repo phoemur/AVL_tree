@@ -265,6 +265,8 @@ private:
             insert_util(std::forward<K>(k), std::forward<V>(v), t->left);
         else if (t->key < k)
             insert_util(std::forward<K>(k), std::forward<V>(v), t->right);
+        else //duplicate key
+            --sz;
         
         balance(t);
     }
@@ -278,6 +280,10 @@ private:
             remove_util(x, t->left);
         else if(t->key < x)
             remove_util(x, t->right);
+        else if (t->key == x) { // duplicate
+            ++sz;
+            return;
+        }
         else if(t->left != nullptr && t->right != nullptr) { // Two children
             t->key = findMin(t->right)->key;
             remove_util(t->key, t->right);

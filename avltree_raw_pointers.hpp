@@ -238,6 +238,8 @@ private:
             insert_util(std::forward<X>(x), t->left);
         else if (x > t->data)
             insert_util(std::forward<X>(x), t->right);
+        else //duplicate key
+            --sz;
             
         balance(t);
     }
@@ -254,13 +256,17 @@ private:
         
         if(x < t->data)
             remove_util(x, t->left);
-        else if(x > t->data)
+        else if(t->data < x)
             remove_util(x, t->right);
+        else if (t->data == x) { // duplicate
+            ++sz;
+            return;
+        }
         else if(t->left != nullptr && t->right != nullptr) { // Two children
             t->data = findMin(t->right)->data;
             remove_util(t->data, t->right);
         }
-        else { // One children
+        else { // One child
             Node *oldNode = t;
             t = (t->left != nullptr) ? t->left : t->right;
             

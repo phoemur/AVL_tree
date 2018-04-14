@@ -236,6 +236,8 @@ private:
             insert_util(std::forward<X>(x), t->left);
         else if (t->data < x)
             insert_util(std::forward<X>(x), t->right);
+        else //duplicate key
+            --sz;
             
         balance(t);
     }
@@ -249,6 +251,10 @@ private:
             remove_util(x, t->left);
         else if(t->data < x)
             remove_util(x, t->right);
+        else if (t->data == x) { // duplicate
+            ++sz;
+            return;
+        }
         else if(t->left != nullptr && t->right != nullptr) { // Two children
             t->data = *findMin(t->right);
             remove_util(t->data, t->right);
