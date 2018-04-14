@@ -252,16 +252,15 @@ private:
      */
     void remove_util(const T& x, Node*& t) noexcept
     {
-        if(t == nullptr) return;   // Item not found; do nothing
+        if(t == nullptr){
+            ++sz;
+            return;   // Item not found; do nothing
+        } 
         
         if(x < t->data)
             remove_util(x, t->left);
         else if(t->data < x)
             remove_util(x, t->right);
-        else if (t->data == x) { // duplicate
-            ++sz;
-            return;
-        }
         else if(t->left != nullptr && t->right != nullptr) { // Two children
             t->data = findMin(t->right)->data;
             remove_util(t->data, t->right);

@@ -274,16 +274,15 @@ private:
     // Recursive delete method
     void remove_util(const Key& x, std::unique_ptr<Node>& t) noexcept
     {
-        if(t == nullptr) return;   // Item not found; do nothing
+        if (t == nullptr) {
+            ++sz;
+            return;   // Item not found; do nothing
+        } 
         
         if(x < t->key)
             remove_util(x, t->left);
         else if(t->key < x)
             remove_util(x, t->right);
-        else if (t->key == x) { // duplicate
-            ++sz;
-            return;
-        }
         else if(t->left != nullptr && t->right != nullptr) { // Two children
             t->key = findMin(t->right)->key;
             remove_util(t->key, t->right);
