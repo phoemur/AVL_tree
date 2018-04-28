@@ -84,7 +84,7 @@ public:
         using c_tp = typename std::iterator_traits<Iter>::value_type;
         static_assert(std::is_constructible<T, c_tp>::value, "Type mismatch");
         
-        for (auto it = first; it != last; ++it) {
+        for (auto it = first; it != last; std::advance(it, 1)) {
             insert(*it);
         }
     }

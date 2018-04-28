@@ -92,7 +92,7 @@ public:
         using v_tp = typename std::iterator_traits<Iter>::value_type::second_type;
         static_assert(std::is_constructible<Value, v_tp>::value, "Type mismatch");
         
-        for (auto it = first; it != last; ++it) {
+        for (auto it = first; it != last; std::advance(it, 1)) {
             insert(it->first, it->second);
         }
     }
